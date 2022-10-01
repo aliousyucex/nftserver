@@ -7,6 +7,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/*', Router);
+app.use('/', Router);
 
 app.listen(3003);
