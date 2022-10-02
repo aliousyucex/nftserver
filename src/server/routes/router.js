@@ -45,7 +45,7 @@ Router.post('/score', (req, res) => {
 });
 
 Router.get('/subscribe', (req, res) => {
-    mysqlCon.query('SELECT * FROM subscribe', (err, rows) => {
+    mysqlCon.query('SELECT count(*) as subcount FROM subscribe', (err, rows) => {
         if (!err) {
             res.send(rows);
         }
@@ -71,7 +71,7 @@ Router.post('/subscribe', (req, res) => {
 
                         const maildata = {
                             to: req.body.email,
-                            from: 'sponsorship@elephantyachtclub.com',
+                            from: 'info@elephantyachtclub.com',
                             templateId: 'd-9e67dc44ceb248f588a45f416d1e3e39',
                         }
 
