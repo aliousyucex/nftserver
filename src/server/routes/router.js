@@ -1,12 +1,10 @@
-const { json } = require('body-parser');
-const { response } = require('express');
 const express = require('express');
-const res = require('express/lib/response');
+require('dotenv').config();
 const Router = express.Router();
-const mysqlCon = require('../db/connection');
 const sendEmail = require('@sendgrid/mail')
+const mysqlCon = require('../db/connection');
 
-sendEmail.setApiKey(process.env.SENDGRID_API_KEY)
+sendEmail.setApiKey(process.env.SENDGRID_API_KEY);
 Router.use(express.json())
 
 
