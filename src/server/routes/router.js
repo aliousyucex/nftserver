@@ -1,10 +1,9 @@
 const express = require('express');
-require('dotenv').config();
 const Router = express.Router();
 const sendEmail = require('@sendgrid/mail')
 const mysqlCon = require('../db/connection');
 
-sendEmail.setApiKey(process.env.SENDGRID_API_KEY);
+sendEmail.setApiKey('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');
 Router.use(express.json())
 
 
