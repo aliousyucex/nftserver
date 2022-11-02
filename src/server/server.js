@@ -5,8 +5,17 @@ const bodyParser = require('body-parser');
 const Router = require('./routes/router');
 var app = express();
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use('/', Router);
 
-app.listen(3003);
+async function boot() {
+    await mysqlCon.connectTry();
+    app.listen(3003);
+}
+boot()
+.then(() => {
+    console.log('yey')})
+.catch((err) => {
+    console.error(err);
+    process.exit(1);
+});

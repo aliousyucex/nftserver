@@ -6,6 +6,9 @@ const mysqlCon = require('../db/connection');
 sendEmail.setApiKey('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');
 Router.use(express.json())
 
+Router.get('/health', (req, res) => {
+    res.status(200).end();
+});
 
 Router.get('/score', (req, res) => {
     mysqlCon.query('SELECT * FROM score', (err, rows) => {
@@ -20,6 +23,8 @@ Router.get('/score', (req, res) => {
         }
         else {
             console.log(err);
+            if (err.message.include()) {}
+            process.exit(1);
         }
     });
 });

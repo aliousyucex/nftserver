@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-
+console.log('puuu')
 var mysqlConnection = mysql.createConnection({
     host:"localhost",
     user:"root",
@@ -7,6 +7,10 @@ var mysqlConnection = mysql.createConnection({
     database:"elephantyacthclub"
 });
 
+const connectTry = async () => { 
+    // bunu calistirdigim anca promise donmeli
+    // baglanirsam ok
+    // baglanamazsam promise reject vermeli
 mysqlConnection.connect((err) => {
     if(!err){
         console.log("Connected");
@@ -15,5 +19,6 @@ mysqlConnection.connect((err) => {
         console.log("Connection Failed");
     }
 });
+}
 
-module.exports = mysqlConnection;
+module.exports = {mysqlConnection, connectTry};
