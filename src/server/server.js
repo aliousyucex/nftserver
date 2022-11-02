@@ -13,9 +13,8 @@ async function boot() {
     app.listen(3003);
 }
 boot()
-.then(() => {
-    console.log('yey')})
+.then((res) => {
+    console.log('Connection test is pass')})
 .catch((err) => {
-    console.error(err);
     process.exit(1);
 });
