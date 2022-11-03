@@ -1,7 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 const sendEmail = require('@sendgrid/mail')
-const mysqlCon = require('../db/connection');
+const {mysqlConnection} = require('../db/connection');
 
 sendEmail.setApiKey('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');
 Router.use(express.json())
@@ -11,7 +11,7 @@ Router.get('/health', (req, res) => {
 });
 
 Router.get('/score', (req, res) => {
-    mysqlCon.query('SELECT * FROM score', (err, rows) => {
+    mysqlConnection.query('SELECT * FROM score', (err, rows) => {
         if (!err) {
             const sortData = [];
             for(var scoreText in rows) {
@@ -30,7 +30,7 @@ Router.get('/score', (req, res) => {
 });
 
 Router.post('/score', (req, res) => {
-    mysqlCon.query(`
+    mysqlConnection.query(`
     INSERT INTO score 
         (userName, scoreText, scoreInt) 
     VALUES  
@@ -47,7 +47,7 @@ Router.post('/score', (req, res) => {
 });
 
 Router.get('/subscribe', (req, res) => {
-    mysqlCon.query('SELECT count(*) as subcount FROM subscribe', (err, rows) => {
+    mysqlConnection.query('SELECT count(*) as subcount FROM subscribe', (err, rows) => {
         if (!err) {
             res.send(rows);
         }
@@ -58,14 +58,14 @@ Router.get('/subscribe', (req, res) => {
 });
 
 Router.post('/subscribe', (req, res) => {
-    mysqlCon.query(`
+    mysqlConnection.query(`
     SELECT count(*) as exist FROM subscribe WHERE email = '${req.body.email}';
     `
         ,
         (err, rows, fields) => {
             if (!err) {
                 if (rows[0].exist < 1)
-                mysqlCon.query(`
+                mysqlConnection.query(`
                 INSERT INTO subscribe (email) VALUES ('${req.body.email}');
                 `,
                 (err, rows, fields) => {

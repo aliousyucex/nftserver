@@ -4,7 +4,7 @@ var mysqlConnection = mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"Asd123!!",
-    database:"elephantyacthclub"
+    database:"elephantyachtclub"
 });
 
 const connectTry = async () => {
